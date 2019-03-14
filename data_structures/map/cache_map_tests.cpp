@@ -28,6 +28,7 @@ void addEvenValues(StringCache* cache) {
                     key,
                     [&]()-> std::string { return std::to_string(i*2); });
             if(std::to_string(i*2) != value) {
+
                 return;
             }
         }
@@ -36,7 +37,7 @@ void addEvenValues(StringCache* cache) {
 
 void addOddValues(StringCache* cache) {
     for (auto i = 0; i < MAX_VALUE; i++) {
-        if (i % 3 == 0) {
+        if ((i +1) % 2 == 0) {
             std::string key = std::to_string(i);
             std::string value = cache->Get(
                     key,
@@ -124,7 +125,7 @@ TEST(CacheMapTests, testMultiThreadedAdd2) {
     t1.join();
     t2.join();
 
-    EXPECT_EQ(MAX_VALUE, map->size());
+    EXPECT_EQ(MAX_VALUE+1, map->size());
 
     for (auto i = 0; i < MAX_VALUE; i++) {
         if (i % 2 == 0) {
@@ -139,7 +140,7 @@ TEST(CacheMapTests, testMultiThreadedAdd2) {
         }
     }
 
-    EXPECT_EQ(MAX_VALUE, map->size());
+    EXPECT_EQ(MAX_VALUE+1, map->size());
 }
 
 namespace {

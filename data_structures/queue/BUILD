@@ -17,7 +17,7 @@ cc_test(
 cc_library(
     name = "bound_buffer",
     hdrs = ["bound_buffer.h"],
-    deps = [],
+    deps = ["queue"],
 )
 
 cc_test(
